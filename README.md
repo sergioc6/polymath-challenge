@@ -39,6 +39,19 @@ Ejecutar migraciones y seeders
 $ ./vendor/bin/sail php artisan migrate:fresh --seed
 ```
 
+## Usuarios de Prueba
+
+Usuario | Password  
+--- | --- 
+sergiocabral.1990@gmail.com | 123456 
+juanromanriquelme@gmail.com | 123456
+martinpalermo@gmail.com | 123456
+
+## Correr Tests
+```sh
+$ ./vendor/bin/phpunit --filter TaskTest
+```
+
 ## Links
 
 - [TasksApp](http://localhost/tasks)
