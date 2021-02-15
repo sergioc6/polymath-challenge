@@ -38,6 +38,8 @@ class TaskTest extends TestCase
             'title' => 'Example',
             'description' => 'Example description'
         ]);
+
+        $response->assertRedirect(route('tasks.index'));
         $response->assertStatus(302);
         $this->assertDatabaseHas('tasks', [
             'title' => 'Example',
@@ -57,6 +59,7 @@ class TaskTest extends TestCase
             'description' => 'New Description'
         ]);
 
+        $response->assertRedirect(route('tasks.index'));
         $response->assertStatus(302);
         $this->assertDatabaseHas('tasks',[
                 'title' => 'New Title',
@@ -75,6 +78,25 @@ class TaskTest extends TestCase
         $response = $this->put(route('tasks.show', ['task' => $task->id]), []);
 
         $response->assertStatus(302);
+    }
+
+    public function test_a_user_can_complete_an_task()
+    {
+        $this->signIn();
+
+        $task = Task::factory()->make();
+        $task->save();
+
+        $response = $this->get(route('tasks.complete', ['task' => $task->id]), []);
+
+        $response->assertStatus(302);
+        $response->assertRedirect(route('tasks.index'));
+        $this->assertDatabaseHas('tasks', [
+            'id' => $task->id,
+            'title' => $task->title,
+            'description' => $task->description,
+            'complete' => true
+        ]);
     }
 
 }
