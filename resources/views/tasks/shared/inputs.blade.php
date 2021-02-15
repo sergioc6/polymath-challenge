@@ -1,7 +1,7 @@
 
 <div class="form-group">
     <label for="title">Task title</label>
-    <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{ isset($task) ? $task->title : old('title') }}" maxlength="255">
+    <input type="text" class="form-control" id="title" name="title" required placeholder="Title" value="{{ isset($task) ? $task->title : old('title') }}" maxlength="255">
     <span class="text-danger">{{ $errors->first('title') }}</span>
 </div>
 
