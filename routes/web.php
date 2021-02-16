@@ -14,13 +14,17 @@ use App\Http\Controllers\TaskController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
+Route::group(['middleware' => 'cors'], function (){
+    // Home Routes
+    Route::get('/', function () {
+        return view('home');
+    });
+
+    // Tasks Routes
+    Route::resource('tasks', TaskController::class)->middleware(['auth']);
+    Route::get('tasks/{task}/complete', [ TaskController::class, 'completeTask'])->where('task', '[0-9]+')->name('tasks.complete')->middleware(['auth']);;
+
+    // Auth Routes
+    require __DIR__.'/auth.php';
 });
 
-// Tasks Routes
-Route::resource('tasks', TaskController::class)->middleware(['auth']);
-Route::get('tasks/{task}/complete', [ TaskController::class, 'completeTask'])->where('task', '[0-9]+')->name('tasks.complete')->middleware(['auth']);;
-
-// Auth Routes
-require __DIR__.'/auth.php';
