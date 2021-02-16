@@ -54,4 +54,5 @@ $ ./vendor/bin/phpunit --filter TaskTest
 
 ## Links
 
-- [TasksApp](http://localhost/tasks)
+- [TasksApp (HEROKU)](http://polymath-challenge.herokuapp.com/)
+- [TasksApp (LOCAL)](http://localhost/tasks)
